@@ -1,0 +1,58 @@
+{
+  "name": "LiveChat",
+  "type": "object",
+  "properties": {
+    "stream_id": {
+      "type": "string",
+      "description": "ID of the live stream"
+    },
+    "content": {
+      "type": "string",
+      "description": "Chat message content"
+    },
+    "user_name": {
+      "type": "string",
+      "description": "Name of the user who sent the message"
+    },
+    "user_avatar": {
+      "type": "string",
+      "description": "Avatar URL of the user"
+    }
+  },
+  "required": [
+    "stream_id",
+    "content",
+    "user_name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

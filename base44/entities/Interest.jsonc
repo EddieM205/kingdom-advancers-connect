@@ -1,0 +1,68 @@
+{
+  "name": "Interest",
+  "type": "object",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "description": "Email of the user who has the interest"
+    },
+    "content_id": {
+      "type": "string",
+      "description": "ID of the post/reel/story being evaluated"
+    },
+    "content_type": {
+      "type": "string",
+      "enum": [
+        "post",
+        "reel",
+        "story"
+      ],
+      "description": "Type of content"
+    },
+    "is_interested": {
+      "type": "boolean",
+      "description": "Whether user is interested in this type of content"
+    },
+    "content_creator_email": {
+      "type": "string",
+      "description": "Email of who created the content"
+    },
+    "themes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags/themes associated with the content"
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Keywords extracted from content"
+    }
+  },
+  "required": [
+    "user_email",
+    "content_id",
+    "content_type",
+    "is_interested"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "user_email": "{{user.email}}"
+    }
+  }
+}

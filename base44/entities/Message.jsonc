@@ -1,0 +1,41 @@
+{
+  "name": "Message",
+  "type": "object",
+  "properties": {
+    "content": {
+      "type": "string",
+      "description": "The message content"
+    },
+    "group_id": {
+      "type": "string",
+      "description": "The ID of the group/conversation this message belongs to"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "Optional file attachment URL"
+    }
+  },
+  "required": [
+    "content",
+    "group_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

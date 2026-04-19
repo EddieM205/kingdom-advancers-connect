@@ -1,0 +1,42 @@
+{
+  "name": "LiveReaction",
+  "type": "object",
+  "properties": {
+    "stream_id": {
+      "type": "string",
+      "description": "ID of the live stream"
+    },
+    "emoji": {
+      "type": "string",
+      "description": "Reaction emoji (heart, clap, fire, etc.)"
+    },
+    "user_name": {
+      "type": "string",
+      "description": "Name of the user who reacted"
+    }
+  },
+  "required": [
+    "stream_id",
+    "emoji",
+    "user_name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "name": "Like",
+  "type": "object",
+  "properties": {
+    "post_id": {
+      "type": "string",
+      "description": "ID of the post being liked/disliked"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "like",
+        "dislike"
+      ],
+      "default": "like",
+      "description": "Type of reaction"
+    }
+  },
+  "required": [
+    "post_id",
+    "type"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

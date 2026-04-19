@@ -1,0 +1,39 @@
+{
+  "name": "ReadingProgress",
+  "type": "object",
+  "properties": {
+    "book": {
+      "type": "string",
+      "description": "Bible book name"
+    },
+    "chapter": {
+      "type": "number",
+      "description": "Chapter number"
+    },
+    "user_email": {
+      "type": "string",
+      "description": "Email of the user"
+    },
+    "last_read": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of last read"
+    }
+  },
+  "required": [
+    "book",
+    "chapter",
+    "user_email"
+  ],
+  "rls": {
+    "read": {
+      "user_email": "{{user.email}}"
+    },
+    "write": {
+      "user_email": "{{user.email}}"
+    },
+    "delete": {
+      "user_email": "{{user.email}}"
+    }
+  }
+}

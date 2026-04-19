@@ -1,0 +1,40 @@
+{
+  "name": "SavedVerse",
+  "type": "object",
+  "properties": {
+    "reference": {
+      "type": "string",
+      "description": "Bible reference (e.g. John 3:16)"
+    },
+    "text": {
+      "type": "string",
+      "description": "The verse text"
+    },
+    "version": {
+      "type": "string",
+      "default": "KJV",
+      "description": "Bible version"
+    }
+  },
+  "required": [
+    "reference",
+    "text"
+  ],
+  "unique": [
+    [
+      "created_by",
+      "reference"
+    ]
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "Reel",
+  "type": "object",
+  "properties": {
+    "video_url": {
+      "type": "string",
+      "description": "URL of the reel video"
+    },
+    "thumbnail_url": {
+      "type": "string",
+      "description": "Thumbnail image for the reel"
+    },
+    "caption": {
+      "type": "string",
+      "description": "Caption text for the reel"
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "public",
+        "friends"
+      ],
+      "default": "public",
+      "description": "Privacy setting"
+    }
+  },
+  "required": [
+    "video_url"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

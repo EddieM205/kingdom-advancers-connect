@@ -1,0 +1,45 @@
+{
+  "name": "BibleBook",
+  "type": "object",
+  "properties": {
+    "bookId": {
+      "type": "string",
+      "description": "Book ID (e.g., GEN, JHN)"
+    },
+    "translationId": {
+      "type": "string",
+      "description": "Reference to BibleTranslation ID"
+    },
+    "name": {
+      "type": "string",
+      "description": "Book name from translation"
+    },
+    "commonName": {
+      "type": "string",
+      "description": "Common name for the book"
+    },
+    "title": {
+      "type": "string"
+    },
+    "order": {
+      "type": "number",
+      "description": "Numerical order in Bible"
+    },
+    "numberOfChapters": {
+      "type": "number"
+    },
+    "totalNumberOfVerses": {
+      "type": "number"
+    },
+    "isApocryphal": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "bookId",
+    "translationId",
+    "name",
+    "commonName"
+  ]
+}

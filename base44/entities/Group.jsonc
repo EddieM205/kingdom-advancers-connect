@@ -1,0 +1,94 @@
+{
+  "name": "Group",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the group"
+    },
+    "description": {
+      "type": "string",
+      "description": "A brief description of the group's purpose"
+    },
+    "cover_photo_url": {
+      "type": "string",
+      "description": "URL for the group's cover photo"
+    },
+    "admins": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of user emails who are admins of this group"
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of user emails who are members of this group"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "group",
+        "dm"
+      ],
+      "default": "group"
+    },
+    "dm_initiator": {
+      "type": "string",
+      "description": "Email of user who initiated the DM (message requester)"
+    },
+    "dm_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "accepted"
+      ],
+      "default": "accepted",
+      "description": "For DMs: 'pending' = message request not yet accepted, 'accepted' = contacts"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "members": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "admins": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "admins": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

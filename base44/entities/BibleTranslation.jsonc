@@ -1,0 +1,61 @@
+{
+  "name": "BibleTranslation",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Translation ID (e.g., BSB, KJV)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the translation"
+    },
+    "englishName": {
+      "type": "string",
+      "description": "English name of the translation"
+    },
+    "shortName": {
+      "type": "string",
+      "description": "Short name for the translation"
+    },
+    "website": {
+      "type": "string",
+      "description": "Website URL for the translation"
+    },
+    "licenseUrl": {
+      "type": "string",
+      "description": "License URL for the translation"
+    },
+    "language": {
+      "type": "string",
+      "description": "ISO 639 language code"
+    },
+    "languageName": {
+      "type": "string"
+    },
+    "languageEnglishName": {
+      "type": "string"
+    },
+    "textDirection": {
+      "type": "string",
+      "enum": [
+        "ltr",
+        "rtl"
+      ]
+    },
+    "numberOfBooks": {
+      "type": "number"
+    },
+    "totalNumberOfChapters": {
+      "type": "number"
+    },
+    "totalNumberOfVerses": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "englishName"
+  ]
+}

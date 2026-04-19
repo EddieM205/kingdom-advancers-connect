@@ -1,0 +1,81 @@
+{
+  "name": "Event",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Event title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Event description"
+    },
+    "group_id": {
+      "type": "string",
+      "description": "The group this event belongs to"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Event start date and time"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Event end date and time"
+    },
+    "location": {
+      "type": "string",
+      "description": "Event location or meeting link"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "meeting",
+        "social",
+        "study",
+        "prayer",
+        "other"
+      ],
+      "default": "meeting"
+    },
+    "attendees": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of user emails who are attending"
+    },
+    "maybe_attendees": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of user emails who might attend"
+    }
+  },
+  "required": [
+    "title",
+    "group_id",
+    "start_date"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

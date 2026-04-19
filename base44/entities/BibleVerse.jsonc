@@ -1,0 +1,49 @@
+{
+  "name": "BibleVerse",
+  "type": "object",
+  "properties": {
+    "translationId": {
+      "type": "string",
+      "description": "Reference to BibleTranslation ID"
+    },
+    "bookId": {
+      "type": "string",
+      "description": "Reference to BibleBook bookId"
+    },
+    "chapterId": {
+      "type": "string",
+      "description": "Reference to BibleChapter ID"
+    },
+    "chapterNumber": {
+      "type": "number"
+    },
+    "verseNumber": {
+      "type": "number"
+    },
+    "text": {
+      "type": "string",
+      "description": "Full verse text"
+    },
+    "isPoetry": {
+      "type": "boolean",
+      "default": false
+    },
+    "isWordsOfJesus": {
+      "type": "boolean",
+      "default": false
+    },
+    "footnoteIds": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    }
+  },
+  "required": [
+    "translationId",
+    "bookId",
+    "chapterNumber",
+    "verseNumber",
+    "text"
+  ]
+}

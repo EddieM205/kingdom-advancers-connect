@@ -1,0 +1,91 @@
+{
+  "name": "GameChallenge",
+  "type": "object",
+  "properties": {
+    "challenger_email": {
+      "type": "string",
+      "description": "Email of the user who sent the challenge"
+    },
+    "opponent_email": {
+      "type": "string",
+      "description": "Email of the challenged user"
+    },
+    "game_type": {
+      "type": "string",
+      "enum": [
+        "quiz",
+        "word_scramble",
+        "verse_match",
+        "character_guess",
+        "speed_round"
+      ],
+      "default": "quiz"
+    },
+    "topic": {
+      "type": "string",
+      "description": "Quiz topic or game name"
+    },
+    "group_id": {
+      "type": "string",
+      "description": "Optional group ID if this is a group challenge"
+    },
+    "challenger_score": {
+      "type": "number",
+      "default": 0
+    },
+    "opponent_score": {
+      "type": "number",
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "active",
+        "completed"
+      ],
+      "default": "pending"
+    },
+    "winner_email": {
+      "type": "string",
+      "description": "Email of the winner"
+    }
+  },
+  "required": [
+    "challenger_email",
+    "opponent_email",
+    "topic"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "challenger_email": "{{user.email}}"
+        },
+        {
+          "opponent_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "challenger_email": "{{user.email}}"
+        },
+        {
+          "opponent_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

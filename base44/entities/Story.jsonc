@@ -1,0 +1,53 @@
+{
+  "name": "Story",
+  "type": "object",
+  "properties": {
+    "file_url": {
+      "type": "string",
+      "description": "URL for the story image or video"
+    },
+    "content": {
+      "type": "string",
+      "description": "Text content for the story"
+    },
+    "theme": {
+      "type": "string",
+      "default": "default",
+      "description": "The theme for a text-based story"
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "public",
+        "friends"
+      ],
+      "default": "public",
+      "description": "The privacy setting of the story"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp for when the story should automatically expire"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

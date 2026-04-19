@@ -1,0 +1,96 @@
+{
+  "name": "LiveStream",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Title of the live stream"
+    },
+    "host_email": {
+      "type": "string",
+      "description": "Email of the broadcaster"
+    },
+    "host_name": {
+      "type": "string",
+      "description": "Display name of the broadcaster"
+    },
+    "host_avatar": {
+      "type": "string",
+      "description": "Avatar URL of the broadcaster"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "live",
+        "ended",
+        "posted"
+      ],
+      "default": "live",
+      "description": "Current status of the stream"
+    },
+    "viewer_count": {
+      "type": "number",
+      "default": 0
+    },
+    "room_id": {
+      "type": "string",
+      "description": "Room identifier"
+    },
+    "video_url": {
+      "type": "string"
+    },
+    "thumbnail_url": {
+      "type": "string"
+    },
+    "stream_start_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "enable_bible": {
+      "type": "boolean",
+      "default": true
+    },
+    "enable_screen_share": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "title",
+    "host_email",
+    "room_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "host_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    }
+  }
+}

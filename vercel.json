@@ -1,0 +1,8 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://kingdom-advancers-connect-820010aa.base44.app/api/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

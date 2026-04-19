@@ -1,0 +1,50 @@
+{
+  "name": "BibleChapter",
+  "type": "object",
+  "properties": {
+    "translationId": {
+      "type": "string",
+      "description": "Reference to BibleTranslation ID"
+    },
+    "bookId": {
+      "type": "string",
+      "description": "Reference to BibleBook bookId"
+    },
+    "chapterNumber": {
+      "type": "number",
+      "description": "Chapter number"
+    },
+    "numberOfVerses": {
+      "type": "number"
+    },
+    "content": {
+      "type": "array",
+      "description": "Array of verse objects",
+      "items": {
+        "type": "object"
+      }
+    },
+    "footnotes": {
+      "type": "array",
+      "description": "Array of footnote objects",
+      "items": {
+        "type": "object"
+      }
+    },
+    "nextChapterLink": {
+      "type": "string"
+    },
+    "previousChapterLink": {
+      "type": "string"
+    },
+    "audioLinks": {
+      "type": "object",
+      "description": "Audio versions available for this chapter"
+    }
+  },
+  "required": [
+    "translationId",
+    "bookId",
+    "chapterNumber"
+  ]
+}

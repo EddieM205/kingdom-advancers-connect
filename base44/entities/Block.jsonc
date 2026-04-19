@@ -1,0 +1,41 @@
+{
+  "name": "Block",
+  "type": "object",
+  "properties": {
+    "blocker_email": {
+      "type": "string",
+      "description": "Email of the user who initiated the block"
+    },
+    "blocked_email": {
+      "type": "string",
+      "description": "Email of the user being blocked"
+    }
+  },
+  "required": [
+    "blocker_email",
+    "blocked_email"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "blocker_email": "{{user.email}}"
+        },
+        {
+          "blocked_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "blocker_email": "{{user.email}}"
+    },
+    "delete": {
+      "blocker_email": "{{user.email}}"
+    }
+  }
+}

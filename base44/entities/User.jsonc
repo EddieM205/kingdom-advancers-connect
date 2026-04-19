@@ -1,0 +1,114 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "handle": {
+      "type": "string",
+      "description": "Unique public username handle (e.g. john_doe_42). Used instead of email for public display."
+    },
+    "bio": {
+      "type": "string",
+      "description": "A short user biography"
+    },
+    "avatar_url": {
+      "type": "string",
+      "description": "URL for the user's profile picture"
+    },
+    "phone_number": {
+      "type": "string",
+      "description": "User's phone number"
+    },
+    "location": {
+      "type": "string",
+      "description": "User's location"
+    },
+    "website": {
+      "type": "string",
+      "description": "User's website URL"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "online",
+        "offline"
+      ],
+      "default": "online"
+    },
+    "is_private": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, this account is private \u2014 follow requests must be approved"
+    },
+    "muted_groups": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of group IDs for which notifications are muted"
+    },
+    "theme": {
+      "type": "string",
+      "default": "sunset_flare",
+      "description": "The user's selected UI theme"
+    },
+    "badges_earned": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "An array of badge IDs the user has earned"
+    },
+    "xp": {
+      "type": "number",
+      "default": 0,
+      "description": "Experience points earned by the user"
+    },
+    "level": {
+      "type": "number",
+      "default": 1,
+      "description": "User's current level"
+    },
+    "notification_settings": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "boolean",
+          "default": true
+        },
+        "friend_requests": {
+          "type": "boolean",
+          "default": true
+        },
+        "game_challenges": {
+          "type": "boolean",
+          "default": true
+        },
+        "events": {
+          "type": "boolean",
+          "default": true
+        },
+        "mentions": {
+          "type": "boolean",
+          "default": true
+        },
+        "email_notifications": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "description": "User notification preferences"
+    },
+    "games_played": {
+      "type": "number",
+      "default": 0,
+      "description": "Total number of games played"
+    },
+    "games_won": {
+      "type": "number",
+      "default": 0,
+      "description": "Total number of games won"
+    }
+  },
+  "required": []
+}

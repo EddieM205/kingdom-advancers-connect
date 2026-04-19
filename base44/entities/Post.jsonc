@@ -1,0 +1,50 @@
+{
+  "name": "Post",
+  "type": "object",
+  "properties": {
+    "content": {
+      "type": "string",
+      "description": "The main content of the post"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "An optional URL for a file attached to the post"
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "public",
+        "friends"
+      ],
+      "default": "public",
+      "description": "The privacy setting of the post"
+    },
+    "theme": {
+      "type": "string",
+      "default": "default",
+      "description": "The theme of the post card"
+    }
+  },
+  "required": [
+    "content"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

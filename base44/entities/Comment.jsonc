@@ -1,0 +1,44 @@
+{
+  "name": "Comment",
+  "type": "object",
+  "properties": {
+    "content": {
+      "type": "string",
+      "description": "The content of the comment"
+    },
+    "post_id": {
+      "type": "string",
+      "description": "The ID of the post this comment belongs to"
+    },
+    "reply_to_comment_id": {
+      "type": "string",
+      "description": "Optional ID of the comment this is a reply to"
+    }
+  },
+  "required": [
+    "content",
+    "post_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

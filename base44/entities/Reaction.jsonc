@@ -1,0 +1,45 @@
+{
+  "name": "Reaction",
+  "type": "object",
+  "properties": {
+    "story_id": {
+      "type": "string",
+      "description": "The ID of the story this reaction belongs to"
+    },
+    "comment_id": {
+      "type": "string",
+      "description": "The ID of the comment this reaction belongs to"
+    },
+    "emoji": {
+      "type": "string",
+      "description": "The emoji reaction (e.g. \u2764\ufe0f, \ud83d\ude02, \ud83d\ude2e, \ud83d\ude22, \ud83d\udd25)"
+    },
+    "reactor_email": {
+      "type": "string",
+      "description": "Email of the user who reacted"
+    }
+  },
+  "required": [
+    "emoji",
+    "reactor_email"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

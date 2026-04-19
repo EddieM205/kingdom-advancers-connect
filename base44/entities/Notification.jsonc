@@ -1,0 +1,52 @@
+{
+  "name": "Notification",
+  "type": "object",
+  "properties": {
+    "recipient_id": {
+      "type": "string",
+      "description": "The email of the user who should receive the notification"
+    },
+    "content": {
+      "type": "string",
+      "description": "The notification message"
+    },
+    "link": {
+      "type": "string",
+      "description": "URL to navigate to when the notification is clicked"
+    },
+    "is_read": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "recipient_id",
+    "content"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "recipient_id": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "recipient_id": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

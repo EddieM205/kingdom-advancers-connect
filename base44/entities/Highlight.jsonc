@@ -1,0 +1,62 @@
+{
+  "name": "Highlight",
+  "type": "object",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "description": "Email of the user who created the highlight"
+    },
+    "verseId": {
+      "type": "string",
+      "description": "Unique verse identifier (e.g. john_3_16)"
+    },
+    "book": {
+      "type": "string",
+      "description": "Book name (e.g. John)"
+    },
+    "chapter": {
+      "type": "number",
+      "description": "Chapter number"
+    },
+    "verse": {
+      "type": "number",
+      "description": "Verse number"
+    },
+    "text": {
+      "type": "string",
+      "description": "The verse text"
+    },
+    "color": {
+      "type": "string",
+      "enum": [
+        "yellow",
+        "blue",
+        "green",
+        "pink",
+        "purple"
+      ],
+      "default": "yellow",
+      "description": "Highlight color"
+    }
+  },
+  "required": [
+    "user_email",
+    "verseId",
+    "book",
+    "chapter",
+    "verse",
+    "text",
+    "color"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}
